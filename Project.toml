@@ -1,0 +1,4 @@
+name = "FastmathOverlay"
+uuid = "32340bd4-0178-4ab8-8fce-9b94bc594446"
+authors = ["Valentin Churavy <v.churavy@gmail.com>"]
+version = "0.1.0"
