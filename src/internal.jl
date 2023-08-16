@@ -8,6 +8,7 @@ module Internal
         parent::MTV
     end
     StackedMethodTable(world::UInt, mt::MethodTable) = StackedMethodTable(world, mt, InternalMethodTable(world))
+    StackedMethodTable(world::UInt, mt::MethodTable, parent::MethodTable) = StackedMethodTable(world, mt, StackedMethodTable(world, parent))
 
     import Core.Compiler: findall, _findall, length, vcat, isempty, max, min, getindex
     function findall(@nospecialize(sig::Type), table::StackedMethodTable; limit::Int=-1)
