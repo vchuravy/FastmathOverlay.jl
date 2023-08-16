@@ -1,8 +1,13 @@
 using Test
 using FastmathOverlay
-using CassetteOverlay
 using InteractiveUtils
 
+if VERSION < v"1.8.0"
+    @test FastmathOverlay.functional() == false
+    exit(0)
+end
+
+using CassetteOverlay
 include("internal.jl")
 
 using CassetteOverlay
