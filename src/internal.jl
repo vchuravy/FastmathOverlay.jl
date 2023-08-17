@@ -13,7 +13,7 @@ module Internal
     import Core.Compiler: findall, _findall, length, vcat, isempty, max, min, getindex
     function findall(@nospecialize(sig::Type), table::StackedMethodTable; limit::Int=-1)
         result = _findall(sig, table.mt, table.world, limit)
-        result === nothing && return nothing
+        result === nothing && return nothing # to many matches
         nr = length(result)
         if nr ≥ 1 && getindex(result, nr).fully_covers
             # no need to fall back to the parent method view
@@ -21,7 +21,7 @@ module Internal
         end
 
         parent_result = findall(sig, table.parent; limit)::Union{Nothing, MethodMatchResult}
-        parent_result === nothing && return nothing
+        parent_result === nothing && return nothing #too many matches
 
         overlayed = parent_result.overlayed | !isempty(result)
         parent_result = parent_result.matches::MethodLookupResult
